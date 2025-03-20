@@ -1,2 +1,2 @@
-# # __init__.py file
-# from . import models
+# __init__.py file
+from . import models

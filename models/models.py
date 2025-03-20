@@ -1,15 +1,18 @@
 import random
 from odoo import models, fields, api
+import logging
+_logger = logging.getLogger(__name__)
 
 class dashboard(models.Model):
     _name = "dashboard.data"
     _description = "Dashboard Data"
+    _logger.info("Dashboard Data model loaded successfully!")
 
     average_quantity = fields.Float("Average Quantity", default=0)
     average_time = fields.Char("Average Time", default="0 days")
     nb_new_orders = fields.Integer("New Orders", default=0)
     nb_cancelled_orders = fields.Integer("Cancelled Orders", default=0)
-    total_amount = fields.Float("Total Amount", default=0)
+    total_amount = fields.Integer("Total Amount", default=0)
     orders_by_size_s = fields.Integer("Orders Size S", default=0)
     orders_by_size_m = fields.Integer("Orders Size M", default=0)
     orders_by_size_xl = fields.Integer("Orders Size XL", default=0)

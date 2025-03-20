@@ -7,10 +7,10 @@ from odoo.http import request
 logger = logging.getLogger(__name__)
 
 class AwesomeDashboard(http.Controller):
-    @http.route('/awesome_dashboard/statistics', type='json', auth='public')
+    @http.route('/awesome_dashboard/statistics', type='json', auth='public', website=True)
     def get_statistics(self):
         """
-        Returns a dict of statistics about the orders:
+        Returns a string with the statistics about the orders:
             'average_quantity': the average number of t-shirts by order
             'average_time': the average time (in hours) elapsed between the
                 moment an order is created, and the moment is it sent
@@ -35,3 +35,21 @@ class AwesomeDashboard(http.Controller):
                 'total_amount': 0,
                 'orders_by_size': { "s": 0, "m": 0, "xl": 0 },
             }
+        
+    @http.route('/generate_random_dashboard_data', auth='user', type='json')
+    def generate_random_dashboard_data(self, **kwargs):
+        # Ensure that superuser can access the data
+        if not request.env.user.has_group('base.group_system'):
+            return {'status': 'error', 'message': 'Permission denied'}
+
+        # Log to ensure the request is being processed
+        _logger.info("Generating random dashboard data...")
+
+        # Try generating the data
+        try:
+            dashboard_data = request.env['dashboard.data']
+            dashboard_data.init_random_data()
+            return {'status': 'success', 'message': 'Random data generated successfully.'}
+        except Exception as e:
+            _logger.error(f"Failed to generate random data: {e}")
+            return {'status': 'error', 'message': f'Failed to generate random data: {e}'}

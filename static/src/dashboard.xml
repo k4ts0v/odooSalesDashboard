@@ -7,6 +7,9 @@
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </t>
 
+            <button type="button" t-on-click="generateRandomData">Generate Random Data</button>
+
+
             <div class="d-flex flex-wrap">
                 <DashboardItem>
                     Average amount of t-shirt by order this month
@@ -38,6 +41,7 @@
                         <t t-esc="dataset.total_amount"/>
                     </div>
                 </DashboardItem>
+                <br/>
                 <DashboardItem>
                     <ChartRenderer chartType="'bar'"/>
                 </DashboardItem>

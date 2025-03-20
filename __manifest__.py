@@ -20,6 +20,7 @@
 
     'data': [
         'views/views.xml',
+        'security/ir.model.access.csv',
     ],
     'assets': {
         'web.assets_backend': [
