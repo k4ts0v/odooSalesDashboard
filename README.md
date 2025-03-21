@@ -24,13 +24,13 @@ The **Sales Dashboard** is an Odoo module designed to provide a comprehensive 
 
 ### **3. Time Periods**
 
-- **Last Week**: View metrics and graphs for the last week.
+- **This week**: View metrics and graphs for this week.
     
-- **Last Month**: View metrics and graphs for the last month.
+- **THis month**: View metrics and graphs for this month.
     
-- **Last 3 Months**: View metrics and graphs for the last 3 months.
+- **Last 3 months**: View metrics and graphs for the last 3 months.
     
-- **Last Year**: View metrics and graphs for the last year.
+- **This year**: View metrics and graphs for the current year.
 
 ## Installation Steps
 
