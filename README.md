@@ -116,3 +116,5 @@ The Sales Dashboard module is designed to be flexible and can be customized to s
 - Modify the time periods or date ranges.
     
 - Integrate with other Odoo modules (e.g., inventory, CRM).
+## Demo
+![Demo animation](./assets/demo.gif?raw=true)
