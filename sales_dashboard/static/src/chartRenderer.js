@@ -8,7 +8,7 @@ import { Component, onWillStart, useRef, useState, useEffect } from "@odoo/owl" 
 
 export class ChartRenderer extends Component {
     // Defining the template for the component, linking it to the corresponding XML view
-    static template = "awesome_dashboard.chartRenderer"
+    static template = "sales_dashboard.chartRenderer"
 
     // Defining the properties that this component will accept
     static props = {

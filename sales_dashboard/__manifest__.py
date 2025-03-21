@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Awesome Dashboard",
+    'name': "Sales Dashboard",
 
     'summary': """
         Starting module for "Discover the JS framework, chapter 2: Build a dashboard"
@@ -24,7 +24,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'awesome_dashboard/static/src/**/*',
+            'sales_dashboard/static/src/**/*',
         ],
     },
     'license': 'AGPL-3'

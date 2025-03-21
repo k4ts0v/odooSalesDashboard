@@ -1,5 +1,5 @@
 <templates xml:space="preserve">
-    <t t-name="awesome_dashboard.AwesomeDashboard">
+    <t t-name="sales_dashboard.SalesDashboard">
         <div class="vh-100 overflow-auto bg-muted">
             <div class="row m-3">
                 <div class="col-lg-12">

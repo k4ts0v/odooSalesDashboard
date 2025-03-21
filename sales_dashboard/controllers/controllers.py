@@ -6,7 +6,7 @@ from odoo.http import request
 
 logger = logging.getLogger(__name__)
 
-class AwesomeDashboard(http.Controller):
+class SalesDashboard(http.Controller):
 
     @http.route('/dashboard/metrics', type='json', auth='user')
     def get_metrics(self, period):
@@ -32,7 +32,7 @@ class AwesomeDashboard(http.Controller):
         data = request.env['dashboard.data'].fetch_sales_over_time(period)
         return data
     
-    # @http.route('/awesome_dashboard/statistics', type='json', auth='public', website=True)
+    # @http.route('/sales_dashboard/statistics', type='json', auth='public', website=True)
     # def get_statistics(self):
     #     """
     #     Returns a string with the statistics about the orders:
@@ -45,7 +45,7 @@ class AwesomeDashboard(http.Controller):
     #     """
     #     try:
     #         # Fetch data from the dashboard.data model
-    #         logger.debug("The /awesome_dashboard/statistics route is being called")
+    #         logger.debug("The /sales_dashboard/statistics route is being called")
     #         data = request.env["dashboard.data"].get_statistics()
     #         logger.info("Fetched statistics data: %s", data)
     #         return data  # Return the data as JSON

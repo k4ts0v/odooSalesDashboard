@@ -7,9 +7,9 @@ import { useService } from "@web/core/utils/hooks";
 import { DashboardItem } from "./dashboardItem";
 import { ChartRenderer } from "./chartRenderer";
 
-export class AwesomeDashboard extends Component {
-    // Define the template for the AwesomeDashboard component
-    static template = "awesome_dashboard.AwesomeDashboard";
+export class SalesDashboard extends Component {
+    // Define the template for the SalesDashboard component
+    static template = "sales_dashboard.SalesDashboard";
     
     // Register child components that will be used within this component's template
     static components = { Layout, DashboardItem, ChartRenderer };
@@ -105,5 +105,5 @@ export class AwesomeDashboard extends Component {
     }
 }
 
-// Register the AwesomeDashboard class as an action in Odoo
-registry.category("actions").add("awesome_dashboard.dashboard", AwesomeDashboard);
+// Register the SalesDashboard class as an action in Odoo
+registry.category("actions").add("sales_dashboard.dashboard", SalesDashboard);
