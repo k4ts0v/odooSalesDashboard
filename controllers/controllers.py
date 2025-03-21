@@ -7,34 +7,59 @@ from odoo.http import request
 logger = logging.getLogger(__name__)
 
 class AwesomeDashboard(http.Controller):
-    @http.route('/awesome_dashboard/statistics', type='json', auth='public', website=True)
-    def get_statistics(self):
+
+    @http.route('/dashboard/metrics', type='json', auth='user')
+    def get_metrics(self, period):
         """
-        Returns a string with the statistics about the orders:
-            'average_quantity': the average number of t-shirts by order
-            'average_time': the average time (in hours) elapsed between the
-                moment an order is created, and the moment is it sent
-            'nb_cancelled_orders': the number of cancelled orders, this month
-            'nb_new_orders': the number of new orders, this month
-            'total_amount': the total amount of orders, this month
+        Expose the method to fetch metrics for the selected period.
         """
-        try:
-            # Fetch data from the dashboard.data model
-            logger.debug("The /awesome_dashboard/statistics route is being called")
-            data = request.env["dashboard.data"].get_statistics()
-            logger.info("Fetched statistics data: %s", data)
-            return data  # Return the data as JSON
-        except Exception as e:
-            logger.error("Error fetching statistics: %s", e)
-            return {
-                'error': 'Failed to fetch statistics',
-                'average_quantity': 0,
-                'average_time': "0 days",
-                'nb_new_orders': 0,
-                'nb_cancelled_orders': 0,
-                'total_amount': 0,
-                'orders_by_size': { "s": 0, "m": 0, "xl": 0 },
-            }
+        data = request.env['dashboard.data'].fetch_metrics(period)
+        return data
+
+    @http.route('/dashboard/top_products', type='json', auth='user')
+    def get_top_products(self, period):
+        """
+        Expose the method to fetch top products for the selected period.
+        """
+        data = request.env['dashboard.data'].fetch_top_products(period)
+        return data
+
+    @http.route('/dashboard/sales_over_time', type='json', auth='user')
+    def get_sales_over_time(self, period):
+        """
+        Expose the method to fetch sales over time for the selected period.
+        """
+        data = request.env['dashboard.data'].fetch_sales_over_time(period)
+        return data
+    
+    # @http.route('/awesome_dashboard/statistics', type='json', auth='public', website=True)
+    # def get_statistics(self):
+    #     """
+    #     Returns a string with the statistics about the orders:
+    #         'average_quantity': the average number of t-shirts by order
+    #         'average_time': the average time (in hours) elapsed between the
+    #             moment an order is created, and the moment is it sent
+    #         'nb_cancelled_orders': the number of cancelled orders, this month
+    #         'nb_new_orders': the number of new orders, this month
+    #         'total_amount': the total amount of orders, this month
+    #     """
+    #     try:
+    #         # Fetch data from the dashboard.data model
+    #         logger.debug("The /awesome_dashboard/statistics route is being called")
+    #         data = request.env["dashboard.data"].get_statistics()
+    #         logger.info("Fetched statistics data: %s", data)
+    #         return data  # Return the data as JSON
+    #     except Exception as e:
+    #         logger.error("Error fetching statistics: %s", e)
+    #         return {
+    #             'error': 'Failed to fetch statistics',
+    #             'average_quantity': 0,
+    #             'average_time': "0 days",
+    #             'nb_new_orders': 0,
+    #             'nb_cancelled_orders': 0,
+    #             'total_amount': 0,
+    #             'orders_by_size': { "s": 0, "m": 0, "xl": 0 },
+    #         }
         
     @http.route('/generate_random_dashboard_data', auth='user', type='json')
     def generate_random_dashboard_data(self, **kwargs):

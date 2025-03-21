@@ -10,9 +10,9 @@
         Starting module for "Discover the JS framework, chapter 2: Build a dashboard"
     """,
 
-    'author': "Odoo",
+    'author': "Lucas Villa",
     'website': "https://www.odoo.com/",
-    'category': 'Tutorials/AwesomeDashboard',
+    'category': 'Dashboards/SalesDashboard',
     'version': '0.1',
     'application': True,
     'installable': True,

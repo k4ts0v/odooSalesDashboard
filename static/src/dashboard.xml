@@ -9,14 +9,13 @@
                             <div class="shadow-sm border m-2 p-4 bg-white">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h1 class="text-primary fw-bold">Sales Dashboard</h1>
-                                    <button type="button" class="btn btn-primary" t-on-click="generateRandomData">Generate Random Data</button>
                                     <div>
-                                        <select class="form-select">
-                                            <option value="0">Select Period</option>
-                                            <option value="7">Last 7 Days</option>
-                                            <option value="30">Last 30 Days</option>
-                                            <option value="90">Last 90 Days</option>
-                                            <option value="365">Last 365 Days</option>
+                                        <select class="form-select" t-on-change="(ev) => onPeriodChange(ev.target.value)">
+                                            <option value="none">Select an option</option>
+                                            <option value="month">This month</option>
+                                            <option value="3months">Past 3 months</option>
+                                            <option value="week">This week</option>
+                                            <option value="year">This year</option>
                                         </select>
                                     </div>
                                 </div>
@@ -24,102 +23,64 @@
                         </div>
                     </div>
 
-                    <!-- Statistics Section (Squares in a Single Row) -->
+                    <!-- Statistics Section -->
                     <div class="row">
                         <div class="col-lg-12 d-flex justify-content-between">
-                            <!-- Average Order Processing Time -->
                             <div class="shadow-sm border m-2 p-4 bg-white text-center square-stat">
                                 <div class="fs-1 fw-bold text-success">
-                                    <t t-esc="dataset.average_time"/>
+                                    <t t-esc="dataset.average_processing_time"/>
                                 </div>
                                 <h3>Average Order Processing Time</h3>
                             </div>
-
-                            <!-- New Orders -->
                             <div class="shadow-sm border m-2 p-4 bg-white text-center square-stat">
                                 <div class="fs-1 fw-bold text-success">
-                                    <t t-esc="dataset.nb_new_orders"/>
+                                    <t t-esc="dataset.new_orders"/>
                                 </div>
                                 <h3>New Orders</h3>
-                                <span>This Month</span>
+                                <span><t t-esc="selectedPeriodLabel"/></span>
                             </div>
-
-                            <!-- Cancelled Orders -->
                             <div class="shadow-sm border m-2 p-4 bg-white text-center square-stat">
                                 <div class="fs-1 fw-bold text-danger">
-                                    <t t-esc="dataset.nb_cancelled_orders"/>
+                                    <t t-esc="dataset.cancelled_orders"/>
                                 </div>
                                 <h3>Cancelled Orders</h3>
-                                <span>This Month</span>
+                                <span><t t-esc="selectedPeriodLabel"/></span>
                             </div>
-
-                            <!-- Total Amount of New Orders -->
                             <div class="shadow-sm border m-2 p-4 bg-white text-center square-stat">
                                 <div class="fs-1 fw-bold text-success">
-                                    <t t-esc="dataset.total_amount"/>
+                                    <t t-esc="dataset.total_revenue"/>
                                 </div>
-                                <h3>Total Amount of New Orders</h3>
-                                <span>This Month</span>
-                            </div>
-
-                            <!-- Additional Statistic (Example) -->
-                            <div class="shadow-sm border m-2 p-4 bg-white text-center square-stat">
-                                <div class="fs-1 fw-bold text-success">
-                                    95%
-                                </div>
-                                <h3>Customer Satisfaction</h3>
-                                <span>This Month</span>
+                                <h3>Total Revenue</h3>
+                                <span><t t-esc="selectedPeriodLabel"/></span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Charts Section -->
-                    <div class="row">
-                        <div class="col-lg-6 m-0 p-0">
-                            <div class="shadow-sm border m-2 p-4 bg-white">
+                    <div class="row mb-5">
+                        <!-- Top Products Chart -->
+                        <div class="col-lg-6 mb-1 p-0">
+                            <div class="shadow-sm border m-2 p-5 bg-white chart-container">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h3 class="text-primary fw-bold">Top Products</h3>
                                     <div class="px-3 py-1 bg-primary cursor-pointer">
                                         <span class="fa fa-arrow-right text-white"/>
                                     </div>
                                 </div>
-                                <ChartRenderer chartType="'doughnut'" title="'Top Products Report'"/>
+                                <ChartRenderer chartType="'pie'" title="'Top Products Report'" dataType="'top_products'" period="selectedPeriod"/>
                             </div>
                         </div>
-                        <div class="col-lg-6 m-0 p-0">
-                            <div class="shadow-sm border m-2 p-4 bg-white">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h3 class="text-primary fw-bold">Top Sales People</h3>
-                                    <div class="px-3 py-1 bg-primary cursor-pointer">
-                                        <span class="fa fa-arrow-right text-white"/>
-                                    </div>
-                                </div>
-                                <ChartRenderer chartType="'pie'" title="'Top Sales People Report'"/>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row mb-5">
+                        <!-- Sales Over Time Chart -->
                         <div class="col-lg-6 mb-1 p-0">
-                            <div class="shadow-sm border m-2 p-4 bg-white h-100">
+                            <div class="shadow-sm border m-2 p-5 bg-white chart-container">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <h3 class="text-primary fw-bold">Monthly Sales</h3>
+                                    <h3 class="text-primary fw-bold">Sales Over Time</h3>
                                     <div class="px-3 py-1 bg-primary cursor-pointer">
                                         <span class="fa fa-arrow-right text-white"/>
                                     </div>
                                 </div>
-                                <ChartRenderer chartType="'bar'" title="'Monthly Sales Report'"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-1 p-0">
-                            <div class="shadow-sm border m-2 p-4 bg-white h-100">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h3 class="text-primary fw-bold">Sales</h3>
-                                    <div class="px-3 py-1 bg-primary cursor-pointer">
-                                        <span class="fa fa-arrow-right text-white"/>
-                                    </div>
-                                </div>
-                                <ChartRenderer chartType="'line'" title="'Sales over time'"/>
+                                <ChartRenderer chartType="'line'" title="'Sales Over Time'" dataType="'sales_over_time'" period="selectedPeriod"/>
                             </div>
                         </div>
                     </div>
