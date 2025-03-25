@@ -3,11 +3,11 @@
     'name': "Sales Dashboard",
 
     'summary': """
-        Starting module for "Discover the JS framework, chapter 2: Build a dashboard"
+        Dashboard for viewing sales statistics, with KPI and graphs.
     """,
 
     'description': """
-        Starting module for "Discover the JS framework, chapter 2: Build a dashboard"
+        Dashboard for viewing sales statistics, with KPI and graphs.
     """,
 
     'author': "Lucas Villa",
@@ -16,7 +16,7 @@
     'version': '0.1',
     'application': True,
     'installable': True,
-    'depends': ['base', 'web', 'mail', 'crm'],
+    'depends': ['base', 'web', 'sales'],
 
     'data': [
         'views/views.xml',
